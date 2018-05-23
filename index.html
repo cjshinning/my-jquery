@@ -8,58 +8,26 @@
 </style>
 <body>
 	
-	<div id="aaron"></div>
+	<div id="test"></div>
 	
 	<script src="jquery.js"></script>
 	<script src="show.js"></script>
 	<script>
-		// 类一
-		function ajQuery(){
-			this.name = 'jQuery';
-			this.sayName = function(){
-				return this.name;
-			}
+		var $$ = aQuery = function(selector){
+			this.selector = selector;
+			return this;
 		}
 
-		var a=new ajQuery()
-		var b=new ajQuery()
-		var c=new ajQuery()
-
-		console.log(a.sayName === b.sayName)	//false
-
-		// 类二
-		// function ajQuery(){
-		// 	this.name = 'jQuery'
-		// }
-		// ajQuery.prototype = {
-		// 	sayName: function(){
-		// 		return this.name;
-		// 	}
-		// }
-
-		// var a=new ajQuery()
-		// var b=new ajQuery()
-		// var c=new ajQuery()
-
-		// console.log(a.sayName === b.sayName)	//true
-
-		// jQuery写法
-		var $jQuery = function(selector, context){
-			return new $jQuery.fn.init(selector, context);
-		}
-
-		$jQuery.fn = $jQuery.prototype = {
-			init:function(){
-				this.name = 'aaron';
-				return this;
+		aQuery.fn = aQuery.prototype = {
+			selectorName: function(){
+				return this.selector;
 			},
-			constructor: $jQuery
+			constructor: aQuery
 		}
 
-		var $a = $jQuery();
+		var a = new $$('aaa');
 
-		show('$jQuery的调用');
-		show($a);
+		$('#test').html(a.selectorName())
 	</script>
 	</body>
 </html>	
