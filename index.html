@@ -8,32 +8,58 @@
 </style>
 <body>
 	
-	<div id="aaron">测试noconflict效果</div>
+	<div id="aaron"></div>
 	
 	<script src="jquery.js"></script>
+	<script src="show.js"></script>
 	<script>
-
-		$('#aaron').click(function(){
-			$.noConflict();
-
-			if(!$){
-				show('使用noConflict后，$不存在')
+		// 类一
+		function ajQuery(){
+			this.name = 'jQuery';
+			this.sayName = function(){
+				return this.name;
 			}
+		}
 
-			if(jQuery){
-				show('使用noConflict后，jQuery存在')
-			}
+		var a=new ajQuery()
+		var b=new ajQuery()
+		var c=new ajQuery()
 
-			;(function($){
-				if($){
-					show('通过闭包隔离后的，转为局部变量的$存在')
-				}
-			})(jQuery)
-		})
+		console.log(a.sayName === b.sayName)	//false
 
-		function show(data) {
-	    	jQuery("body").append('<li>' + data + '</li>')
-	    }
+		// 类二
+		// function ajQuery(){
+		// 	this.name = 'jQuery'
+		// }
+		// ajQuery.prototype = {
+		// 	sayName: function(){
+		// 		return this.name;
+		// 	}
+		// }
+
+		// var a=new ajQuery()
+		// var b=new ajQuery()
+		// var c=new ajQuery()
+
+		// console.log(a.sayName === b.sayName)	//true
+
+		// jQuery写法
+		var $jQuery = function(selector, context){
+			return new $jQuery.fn.init(selector, context);
+		}
+
+		$jQuery.fn = $jQuery.prototype = {
+			init:function(){
+				this.name = 'aaron';
+				return this;
+			},
+			constructor: $jQuery
+		}
+
+		var $a = $jQuery();
+
+		show('$jQuery的调用');
+		show($a);
 	</script>
 	</body>
 </html>	
