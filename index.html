@@ -8,32 +8,62 @@
 </style>
 <body>
 
-	<ul>
+	<!--<ul>
 		<li id="a">aoo</li>
 		<li id="b">bar</li>
 		<li id="c">car</li>
 	</ul>
 
 	打印出$$("li").get(1)
-	<div id="aaron"></div>
+	<div id="aaron"></div> -->
 	
 	<script src="jquery.js"></script>
 	<script src="show.js"></script>
 	<script>
-		function each(obj,callback,context,arg){
-			var i=0;
-			var value;
-			var length = obj.length;
-			for(;i<length;i++){
-				callback.call(context || null, obj[i], arg);
-			}
-		}
+		var body1 = $("body")
+		var body2 = $("body")
 
-		var arr = ['a','b','c'];
 
-		each(arr, function(name, arg){
-			$('body').append('<li>'+name+'</li>')
-		}, this, 'aaa')
+		$.data(body1, "bar", '慕课网一');
+		$.data(body2, "bar", '慕课网二');
+
+		show(  $.data(body1, "bar") )
+		show(  $.data(body2, "bar") )
+
+		// var Obervable = {
+		// 	callback: [],
+		// 	add: function(fn){
+		// 		this.callback.push(fn);
+		// 	},
+		// 	fire: function(data){
+		// 		this.callback.forEach(function(fn){
+		// 			fn(data);
+		// 		})
+		// 	}
+		// }
+
+		// function ajax(arg){
+		// 	setTimeout(function(){
+		// 		arg.successful(arg.data+',返回获取到后台的数据')
+		// 	},1000)
+		// }
+
+		// Obervable.add(function(data){
+		// 	show('执行动作一' + data)
+		// })
+
+		// Obervable.add(function(data){
+		// 	show('执行动作二' + data)
+		// })
+
+		// // Obervable.fire();
+
+		// ajax({
+		// 	data: '请求数据',
+		// 	successful: function(data){
+		// 		Obervable.fire(data);
+		// 	}
+		// })
 
 		// var $$ = aQuery = function(selector){
 		// 	// console.log(aQuery.fn.init)
