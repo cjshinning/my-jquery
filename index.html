@@ -7,27 +7,32 @@
 <style type="text/css">
 </style>
 <body>
-	
-	<div id="test"></div>
+	打印$$().say()
+	<div id="aaron"></div>
 	
 	<script src="jquery.js"></script>
 	<script src="show.js"></script>
 	<script>
 		var $$ = aQuery = function(selector){
-			this.selector = selector;
-			return this;
+			return new aQuery.fn.init(selector)
 		}
 
 		aQuery.fn = aQuery.prototype = {
-			selectorName: function(){
-				return this.selector;
+			name: 'aaron',
+			init: function(selector){
+				this.selector = selector;
+				return this;
 			},
 			constructor: aQuery
 		}
 
-		var a = new $$('aaa');
+		aQuery.fn.init.prototype = aQuery.fn;
 
-		$('#test').html(a.selectorName())
+		aQuery.fn.say = function(){
+			$('#aaron').html(this.name);
+		}
+
+		$$().say()
 	</script>
 	</body>
 </html>	
