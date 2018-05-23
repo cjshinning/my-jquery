@@ -7,13 +7,14 @@
 <style type="text/css">
 </style>
 <body>
-	打印$$().say()
+	链式调用$$().setName('慕课网-Aaron').getName()的结果：
 	<div id="aaron"></div>
 	
 	<script src="jquery.js"></script>
 	<script src="show.js"></script>
 	<script>
 		var $$ = aQuery = function(selector){
+			console.log(aQuery.fn.init)
 			return new aQuery.fn.init(selector)
 		}
 
@@ -28,11 +29,17 @@
 
 		aQuery.fn.init.prototype = aQuery.fn;
 
-		aQuery.fn.say = function(){
-			$('#aaron').html(this.name);
+		aQuery.fn.setName = function(myName){
+			this.myName = myName;
+			return this;
 		}
 
-		$$().say()
+		aQuery.fn.getName = function(){
+			$('#aaron').html(this.myName);
+			return this;
+		}
+
+		$$().setName('慕课网-Aaron').getName();
 	</script>
 	</body>
 </html>	
