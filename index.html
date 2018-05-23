@@ -13,7 +13,7 @@
 </style>
 <body>
 
-	<button id="test1">jQuey[0]</button>
+	<!-- <button id="test1">jQuey[0]</button>
 	<button id="test2">jQuey.get</button>
 	<button id="test3">aQuery[0]</button>
 	<button id="test4">aQuery.get</button>
@@ -23,10 +23,68 @@
 	<div id="show1"></div>
 	<div id="show2"></div>
 	<div id="show3"></div>
-	<div id="show4"></div>
+	<div id="show4"></div> -->
 	
 	<script src="jquery.js"></script>
+	<script src="show.js"></script>
 	<script>
+		show('观察脚本加载顺序')
+
+		document.addEventListener('DOMContentLoaded', function(){
+			show('DOMContentLoaded回调')
+		}, false)
+
+		window.addEventListener('load', function(){
+			show('load回调')
+		})
+
+		show('脚本解析1')
+
+		$(function(){
+			show('脚本解析2')
+		})
+
+		show('脚本解析3')
+
+	// var aQuery = function(selector){
+	// 	// console.log(this instanceof aQuery)
+	// 	if(!(this instanceof aQuery)){
+	// 		return new aQuery(selector);
+	// 	}
+	// 	// console.log(/[^#].*/.exec(selector)[0])
+	// 	var elem = document.getElementById(/[^#].*/.exec(selector)[0])
+	// 	console.log(elem)
+	// 	this.length = 1;
+	// 	this[0] = elem;
+	// 	this.context = document;
+	// 	this.selector = selector;
+	// 	this.get = function(num) {
+	// 		return this;
+	// 	}
+	// 	return this;
+	// }
+
+	// console.log($('#book'))	
+	// console.log(aQuery('#book'))
+	// // aQuery('#book')
+
+	// $('#test1').click(function(){
+	// 	$('#show1').append($('#book')[0])
+	// })
+
+	// $("#test2").click(function() {	
+	// 	$('#show2').append($('#book').get(0))
+	// })
+
+	// $("#test3").click(function() {
+	// 	$('#show3').append(aQuery("#book")[0])
+	// })
+
+	// $("#test4").click(function() {
+	// 	$('#show4').append(aQuery("#book").get(0))
+	// })
+
+
 	// ;(function (global, factory) {
 	// 	factory(global);
 	// }(typeof window !== "undefined" ? window : this, function(window, noGlobal){
@@ -37,44 +95,6 @@
 
 	// 	return jQuery;
 	// }))
-
-	var aQuery = function(selector){
-		// console.log(this instanceof aQuery)
-		if(!(this instanceof aQuery)){
-			return new aQuery(selector);
-		}
-		// console.log(/[^#].*/.exec(selector)[0])
-		var elem = document.getElementById(/[^#].*/.exec(selector)[0])
-		console.log(elem)
-		this.length = 1;
-		this[0] = elem;
-		this.context = document;
-		this.selector = selector;
-		this.get = function(num) {
-			return this;
-		}
-		return this;
-	}
-
-	console.log($('#book'))
-	console.log(aQuery('#book'))
-	// aQuery('#book')
-
-	$('#test1').click(function(){
-		$('#show1').append($('#book')[0])
-	})
-
-	$("#test2").click(function() {	
-		$('#show2').append($('#book').get(0))
-	})
-
-	// $("#test3").click(function() {
-	// 	$('#show3').append(aQuery("#book")[0])
-	// })
-
-	// $("#test4").click(function() {
-	// 	$('#show4').append(aQuery("#book").get(0))
-	// })
 
 
 	</script>
