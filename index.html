@@ -7,14 +7,13 @@
 <style type="text/css">
 </style>
 <body>
-	链式调用$$().setName('慕课网-Aaron').getName()的结果：
 	<div id="aaron"></div>
 	
 	<script src="jquery.js"></script>
 	<script src="show.js"></script>
 	<script>
 		var $$ = aQuery = function(selector){
-			console.log(aQuery.fn.init)
+			// console.log(aQuery.fn.init)
 			return new aQuery.fn.init(selector)
 		}
 
@@ -29,17 +28,50 @@
 
 		aQuery.fn.init.prototype = aQuery.fn;
 
-		aQuery.fn.setName = function(myName){
-			this.myName = myName;
-			return this;
+		aQuery.extend = aQuery.fn.extend = function(){
+			var options, src, copy,
+				target = arguments[0] || {},
+				i = 1,
+				length = arguments.length;
+
+				if(i === length) {
+					target = this;
+					i--;
+				}
+
+				for(;i<length;i++){
+					if((options = arguments[i]) != null) {
+						for(name in options) {
+							copy = options[name];
+							target[name] = copy;
+						}
+					}
+				}
+
+				return target;
 		}
 
-		aQuery.fn.getName = function(){
-			$('#aaron').html(this.myName);
-			return this;
-		}
+		aQuery.fn.extend({
+			setName: function(myName){
+				this.myName = myName;
+				return this;
+			},
+			getName: function(){
+				$('#aaron').html(this.myName);
+				return this;
+			}
+		})
+		// aQuery.fn.setName = function(myName){
+		// 	this.myName = myName;
+		// 	return this;
+		// }
 
-		$$().setName('慕课网-Aaron').getName();
+		// aQuery.fn.getName = function(){
+		// 	$('#aaron').html(this.myName);
+		// 	return this;
+		// }
+
+		$$().setName('慕课网-Aaron').getName();;
 	</script>
 	</body>
 </html>	
